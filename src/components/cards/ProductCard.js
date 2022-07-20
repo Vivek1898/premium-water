@@ -1,11 +1,12 @@
-import React, { useState } from "react";
 import { Card, Tooltip } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import laptop from "../../images/laptop.png";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
-import { showAverage } from "../../functions/rating";
 import _ from "lodash";
-import { useSelector, useDispatch } from "react-redux";
+import laptop from "../../images/laptop.png";
+import { showAverage } from "../../functions/rating";
 
 const { Meta } = Card;
 
@@ -61,22 +62,24 @@ const ProductCard = ({ product }) => {
       )}
 
       <Card
+        className="rounded"
+        hoverable
         cover={
           <img
             src={images && images.length ? images[0].url : laptop}
-            style={{ height: "150px", objectFit: "cover" }}
-            className="p-1"
+            style={{ height: "220px", objectFit: "cover" }}
+            className="" alt="Water bottle"
           />
         }
         actions={[
-          <Link to={`/product/${slug}`}>
-            <EyeOutlined className="text-warning" /> <br /> View Product
+          <Link className="text-bold fw-bold" to={`/product/${slug}`}>
+            <EyeOutlined className="text-primary" /> <br /> <h6>View Product</h6>
           </Link>,
           <Tooltip title={tooltip}>
-            <a onClick={handleAddToCart} disabled={product.quantity < 1}>
-              <ShoppingCartOutlined className="text-danger" /> <br />
+            <a><h6 onClick={handleAddToCart} disabled={product.quantity < 1}>
+              <ShoppingCartOutlined className="text-primary " /> <br />
               {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
-            </a>
+            </h6></a>
           </Tooltip>,
         ]}
       >

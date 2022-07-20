@@ -1,10 +1,11 @@
-import React from "react";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+
+import React from "react";
 import ShowPaymentInfo from "../cards/ShowPaymentInfo";
 
 const Orders = ({ orders, handleStatusChange }) => {
   const showOrderInTable = (order) => (
-    <table className="table table-bordered">
+    <table className="table table-success table-striped">
       <thead className="thead-light">
         <tr>
           <th scope="col">Title</th>

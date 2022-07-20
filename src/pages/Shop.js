@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
-import {
-  getProductsByCount,
-  fetchProductsByFilter,
-} from "../functions/product";
-import { getCategories } from "../functions/category";
-import { getSubs } from "../functions/sub";
-import { useSelector, useDispatch } from "react-redux";
-import ProductCard from "../components/cards/ProductCard";
-import { Menu, Slider, Checkbox, Radio } from "antd";
+import { Checkbox, Menu, Radio, Slider } from "antd";
 import {
   DollarOutlined,
   DownSquareOutlined,
   StarOutlined,
 } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import {
+  fetchProductsByFilter,
+  getProductsByCount,
+} from "../functions/product";
+import { useDispatch, useSelector } from "react-redux";
+
+import ProductCard from "../components/cards/ProductCard";
 import Star from "../components/forms/Star";
+import { getCategories } from "../functions/category";
+import { getSubs } from "../functions/sub";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -29,7 +30,7 @@ const Shop = () => {
   const [sub, setSub] = useState("");
   const [brands, setBrands] = useState([
     "BestWater",
-   
+
   ]);
   const [brand, setBrand] = useState("");
   const [colors, setColors] = useState([
@@ -308,10 +309,10 @@ const Shop = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3 pt-2">
-          <h4>Search/Filter</h4>
+    <div className="container-fluid ">
+      <div className="row ">
+        <div className="col-md-3 pt-4 table">
+          <h5 className="fw-bolder text-primary pl-2">Filters</h5>
           <hr />
 
           <Menu
@@ -322,9 +323,9 @@ const Shop = () => {
             <SubMenu
               key="1"
               title={
-                <span className="h6">
+                <h6 >
                   <DollarOutlined /> Price
-                </span>
+                </h6>
               }
             >
               <div>
@@ -343,9 +344,9 @@ const Shop = () => {
             <SubMenu
               key="2"
               title={
-                <span className="h6">
+                <h6>
                   <DownSquareOutlined /> Categories
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
@@ -355,9 +356,9 @@ const Shop = () => {
             <SubMenu
               key="3"
               title={
-                <span className="h6">
+                <h6>
                   <StarOutlined /> Rating
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }}>{showStars()}</div>
@@ -367,9 +368,9 @@ const Shop = () => {
             <SubMenu
               key="4"
               title={
-                <span className="h6">
+                <h6>
                   <DownSquareOutlined /> Sub Categories
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
@@ -381,9 +382,9 @@ const Shop = () => {
             <SubMenu
               key="5"
               title={
-                <span className="h6">
+                <h6>
                   <DownSquareOutlined /> Brands
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }} className="pr-5">
@@ -395,9 +396,9 @@ const Shop = () => {
             <SubMenu
               key="6"
               title={
-                <span className="h6">
+                <h6>
                   <DownSquareOutlined /> Colors
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }} className="pr-5">
@@ -409,9 +410,9 @@ const Shop = () => {
             <SubMenu
               key="7"
               title={
-                <span className="h6">
+                <h6>
                   <DownSquareOutlined /> Shipping
-                </span>
+                </h6>
               }
             >
               <div style={{ maringTop: "-10px" }} className="pr-5">
@@ -421,11 +422,15 @@ const Shop = () => {
           </Menu>
         </div>
 
-        <div className="col-md-9 pt-2">
+        <div className="col-md-9 pt-2 bg-light">
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
-            <h4 className="text-danger">Products</h4>
+            <div>
+              <h2 className="text-primary pl-2">Products</h2>
+              <hr />
+            </div>
+
           )}
 
           {products.length < 1 && <p>No products found</p>}
