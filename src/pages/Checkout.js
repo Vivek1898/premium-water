@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { Input } from 'antd';
-import {
-  getUserCart,
-  emptyUserCart,
-  saveUserAddress,
-  applyCoupon,
-  createCashOrderForUser,
-  sendOtp,
-  applyTip
-} from "../functions/user";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+import { Button, Input, Space } from 'antd';
+import React, { useEffect, useState } from "react";
+import {
+  applyCoupon,
+  applyTip,
+  createCashOrderForUser,
+  emptyUserCart,
+  getUserCart,
+  saveUserAddress,
+  sendOtp
+} from "../functions/user";
+import { useDispatch, useSelector } from "react-redux";
+
 import Axios from "axios";
+import ReactQuill from "react-quill";
+import { toast } from "react-toastify";
 
 const Checkout = ({ history }) => {
   const [products, setProducts] = useState([]);
@@ -44,25 +46,25 @@ const Checkout = ({ history }) => {
   const [show, setshow] = useState(false);
   const [final, setfinal] = useState('');
 
-  const signin =async  () => {
+  const signin = async () => {
     console.log(mynumber)
     sendOtp(user.token, mynumber).then((res) => {
       if (res.data.ok) {
-        
+
         toast.success("Otp saved");
       }
     });
-//JGDJGD
-}
+    //JGDJGD
+  }
 
-// Validate OTP
-const ValidateOtp = () => {
+  // Validate OTP
+  const ValidateOtp = () => {
     if (otp === null || final === null)
-        return;
-if(otp===final){
-  console.log("sucess");
-}
-}
+      return;
+    if (otp === final) {
+      console.log("sucess");
+    }
+  }
   useEffect(() => {
     getUserCart(user.token).then((res) => {
       console.log("user cart res", JSON.stringify(res.data, null, 4));
@@ -90,10 +92,10 @@ if(otp===final){
       toast.success("Cart is emapty. Contniue shopping.");
     });
   };
-const dataEmpty="ABCD"
+  const dataEmpty = "ABCD"
   const saveAddressToDb = () => {
-  console.log(zip);
-    saveUserAddress(user.token, address,dataEmpty,email,mobile,ad1,ad2,landmark,zip).then((res) => {
+    console.log(zip);
+    saveUserAddress(user.token, address, dataEmpty, email, mobile, ad1, ad2, landmark, zip).then((res) => {
       if (res.data.ok) {
         setAddressSaved(true);
         toast.success("Address saved");
@@ -131,7 +133,7 @@ const dataEmpty="ABCD"
       console.log("RES ON COUPON APPLIED", res.data);
       if (res.data) {
         setTipAdd(res.data)
-       // setTotalAfterDiscount(res.data);
+        // setTotalAfterDiscount(res.data);
         // update redux coupon applied true/false
         dispatch({
           type: "TIP_APPLIED",
@@ -152,76 +154,84 @@ const dataEmpty="ABCD"
 
 
   const showAddress = () => (
-    <>
-  
-  <Input
+    <Space direction="vertical"
+      style={{
+        width: '100%',
+      }}>
+
+      <Input
+
         onChange={(e) => {
           setemail(e.target.value);
-         
+
         }}
         placeholder="Enter Email"
         value={email}
         type="text"
-       
+
       />
-       <Input
+      <Input
         onChange={(e) => {
           setmobile(e.target.value);
-         
+
         }}
         placeholder="Enter Mobile Number"
         value={mobile}
         type="text"
-       
+
       />
 
       <Input
         onChange={(e) => {
           setad1(e.target.value);
-         
+
         }}
         placeholder="Enter Address Line 1"
         value={ad1}
         type="text"
-       
+
       />
-       <Input
+      <Input
         onChange={(e) => {
           setad2(e.target.value);
-         
+
         }}
         placeholder="Enter Address Line 2"
         value={ad2}
         type="text"
-       
+
       />
-       <Input
+      <Input
         onChange={(e) => {
           setlandmark(e.target.value);
-         
+
         }}
         placeholder="Enter Landmark"
         value={landmark}
         type="text"
-       
+
       />
-      
-       <Input
+
+      <Input
         onChange={(e) => {
           setZip(e.target.value);
-         
+
         }}
         placeholder="Enter Zip"
         value={zip}
         type="text"
-       
+
       />
-     
-  
-      <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
+
+
+      <Button
+        size="large"
+        className="bg-primary mt-2"
+        type="primary"
+        onClick={saveAddressToDb}>
         Save
-      </button>
-    </>
+      </Button>
+    </Space >
   );
 
   const showProductSummary = () =>
@@ -256,15 +266,18 @@ const dataEmpty="ABCD"
       <input
         onChange={(e) => {
           setTip(e.target.value);
-          
+
         }}
         value={tip}
-        type="text"
+        type="number"
         className="form-control"
       />
-      <button onClick={applyDiscountTip} className="btn btn-primary mt-2">
+      <Button
+        type="primary"
+        size="large"
+        onClick={applyDiscountTip} className="bg-primary mt-2 mb-4">
         Apply Now
-      </button>
+      </Button>
     </>
   );
 
@@ -305,73 +318,82 @@ const dataEmpty="ABCD"
   };
 
   return (
-    <div className="row">
-      <div className="col-md-6">
-        <h4>Delivery Address</h4>
-        <br />
-        <br />
-        {showAddress()}
-        <hr />
-        <h4>Give Tip?</h4>
-        <br />
-        {/* {showApplyCoupon()} */}
-       
-       
-        {showApplyTip()}
-      
-      
-      </div>
+    <div className="bg-light">
+      <div className="container pt-1 ">
+        <div className="row">
+          <div className="col-md-8 pt-4 card mb-4">
+            <h2 className="fw-bold ">Delivery Address</h2>
+            <hr />
+            {showAddress()}
+            <hr />
+            <h3 className="text-muted">Give Tip?</h3>
+            <br />
+            {/* {showApplyCoupon()} */}
 
-      <div className="col-md-6">
-        <h4>Order Summary</h4>
-        <hr />
-        <p>Products {products.length}</p>
-        <hr />
-        {showProductSummary()}
-        <hr />
-        <p>Cart Total: {total}</p>
- 
-        {/* {totalAfterDiscount > 0 && (
+
+            {showApplyTip()}
+
+
+          </div>
+          <div className="col-md-4">
+            <div className="card p-4 ripple shadow-1-strong rounded">
+              <h2 className="fw-bold pt-4">Order Summary</h2>
+              <h6>Products ({products.length})</h6>
+              <hr /><h6 className="text-primary">
+                {showProductSummary()}
+              </h6>
+              <hr />
+              <h5>Cart Total: {total}</h5>
+
+              {/* {totalAfterDiscount > 0 && (
           <p className="bg-success p-2">
             Discount Applied: Total Payable: ${totalAfterDiscount}
           </p>
         )} */}
-          {tipAdd > 0 && (
-          <p className="bg-success p-2">
-         TIP Applied: Total Payable: ${tipAdd}
-          </p>
-        )}
+              {tipAdd > 0 && (
+                <p className="bg-success p-2">
+                  TIP Applied: Total Payable: ${tipAdd}
+                </p>
+              )}
 
 
-        <div className="row">
-          <div className="col-md-6">
-            {COD ? (
-              <button
-                className="btn btn-primary"
-                disabled={!addressSaved || !products.length}
-                onClick={createCashOrder}
-              >
-                Place Order
-              </button>
-            ) : (
-              <button
-                className="btn btn-primary"
-                disabled={!addressSaved || !products.length}
-                onClick={() => history.push("/payment")}
-              >
-                Place Order
-              </button>
-            )}
-          </div>
+              <div className="row pt-2 ">
+                <div className="col">
+                  {COD ? (
+                    <Button
+                      size="large"
+                      className="bg-primary"
+                      type="primary"
+                      disabled={!addressSaved || !products.length}
+                      onClick={createCashOrder}
+                    >
+                      Place Order
+                    </Button>
+                  ) : (
+                    <Button
+                      size="large"
+                      className="bg-primary text-white"
+                      type="primary"
+                      disabled={!addressSaved || !products.length}
+                      onClick={() => history.push("/payment")}
+                    >
+                      Place Order
+                    </Button>
+                  )}
+                </div>
 
-          <div className="col-md-6">
-            <button
-              disabled={!products.length}
-              onClick={emptyCart}
-              className="btn btn-primary"
-            >
-              Empty Cart
-            </button>
+                <div className="col">
+                  <Button
+                    disabled={!products.length}
+                    onClick={emptyCart}
+                    size="large"
+                    className="btn btn-primary"
+                  >
+                    Empty Cart
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useSelector, useDispatch } from "react-redux";
-import { createPaymentIntent } from "../functions/stripe";
-import { Link } from "react-router-dom";
-import { Card } from "antd";
-import { DollarOutlined, CheckOutlined, SwapOutlined } from "@ant-design/icons";
-import Laptop from "../images/laptop.png";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { CheckOutlined, DollarOutlined, SwapOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
 import { createOrder, emptyUserCart } from "../functions/user";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Card } from "antd";
+import Laptop from "../images/laptop.png";
+import { Link } from "react-router-dom";
+import { createPaymentIntent } from "../functions/stripe";
 
 const StripeCheckout = ({ history }) => {
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ const StripeCheckout = ({ history }) => {
       {!succeeded && (
         <div>
           {coupon && totalAfterDiscount !== undefined ? (
-            <p className="alert alert-success">{`Total after tip: $${totalAfterDiscount}`}</p>
+            <h6 className="alert alert-success">{`Total after tip: $${totalAfterDiscount}`}</h6>
           ) : (
             <p className="alert alert-danger">No coupon applied</p>
           )}
@@ -130,14 +131,14 @@ const StripeCheckout = ({ history }) => {
             />
           }
           actions={[
-            <>
+            <h6>
               <DollarOutlined className="text-info" /> <br /> Total: $
               {cartTotal}
-            </>,
-            <>
+            </h6>,
+            <h6>
               <CheckOutlined className="text-info" /> <br /> Total payable : $
               {(payable / 100).toFixed(2)}
-            </>,
+            </h6>,
           ]}
         />
       </div>
@@ -149,10 +150,10 @@ const StripeCheckout = ({ history }) => {
           onChange={handleChange}
         />
         <button
-          className="stripe-button"
+          className="stripe-button pt-2"
           disabled={processing || disabled || succeeded}
         >
-          <span id="button-text">
+          <span id="btn btn-primary">
             {processing ? <div className="spinner" id="spinner"></div> : "Pay"}
           </span>
         </button>

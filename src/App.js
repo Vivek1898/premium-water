@@ -1,12 +1,14 @@
-import React, { useEffect, lazy, Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import { auth } from "./firebase";
-import { useDispatch } from "react-redux";
-import { currentUser } from "./functions/auth";
+
+import React, { Suspense, lazy, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+
 import { LoadingOutlined } from "@ant-design/icons";
+import { ToastContainer } from "react-toastify";
+import { auth } from "./firebase";
+import { currentUser } from "./functions/auth";
+import { useDispatch } from "react-redux";
 
 // import Login from "./pages/auth/Login";
 // import Register from "./pages/auth/Register";
@@ -111,7 +113,7 @@ const App = () => {
         <div className="col text-center p-5">
           __ Loading
           <LoadingOutlined />
-         Please Wait __
+          Please Wait __
         </div>
       }
     >

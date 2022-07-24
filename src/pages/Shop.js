@@ -311,7 +311,7 @@ const Shop = () => {
   return (
     <div className="container-fluid ">
       <div className="row ">
-        <div className="col-md-3 pt-4 table">
+        <div className="col-md-2 pt-4 table">
           <h5 className="fw-bolder text-primary pl-2">Filters</h5>
           <hr />
 
@@ -422,7 +422,9 @@ const Shop = () => {
           </Menu>
         </div>
 
-        <div className="col-md-9 pt-2 bg-light">
+
+
+        <div className="col-md-10 pt-2 bg-light pl-4 item-center">
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
@@ -437,7 +439,7 @@ const Shop = () => {
 
           <div className="row pb-5">
             {products.map((p) => (
-              <div key={p._id} className="col-md-4 mt-3">
+              <div key={p._id} className="col-md-3 mt-3 m-1">
                 <ProductCard product={p} />
               </div>
             ))}

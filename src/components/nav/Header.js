@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Anchor, Menu, Badge } from "antd";
-import LeftMenu from "./LeftMenu"
-import RightMenu from './RightMenu'
+import { Anchor, Badge, Menu } from "antd";
 import {
   AppstoreOutlined,
-  SettingOutlined,
-  UserOutlined,
-  UserAddOutlined,
   LogoutOutlined,
-  ShoppingOutlined,
+  SettingOutlined,
   ShoppingCartOutlined,
+  ShoppingOutlined,
+  UserAddOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import firebase from "firebase";
+import { Button, Drawer } from 'antd';
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+
+import LeftMenu from "./LeftMenu"
+import { Link } from "react-router-dom";
+import RightMenu from './RightMenu'
 import Search from "../forms/Search";
-import { Drawer, Button } from 'antd';
+import firebase from "firebase";
+import { useHistory } from "react-router-dom";
 const { SubMenu, Item } = Menu;
 //const { Link } = Anchor;
 const Header = () => {
@@ -24,14 +25,14 @@ const Header = () => {
   //   current: 'mail',
   //   visible: false
   // }
-  
-  const [state,setState] = useState(false);
- const showDrawer2 = () => {
+
+  const [state, setState] = useState(false);
+  const showDrawer2 = () => {
     setState({
       visible: true,
     });
   };
- const onClose2 = () => {
+  const onClose2 = () => {
     setState({
       visible: false,
     });
@@ -130,27 +131,27 @@ const Header = () => {
 
 
     <nav className="menuBar">
-    <div className="logo">
-    <Link to="/">LOGO</Link>
-    </div>
-    <div className="menuCon">
-      <div className="leftMenu">
-        <LeftMenu />
+      <div className="logo">
+        <Link to="/">LOGO</Link>
       </div>
-      <div className="rightMenu">
+      <div className="menuCon">
+        <div className="leftMenu">
+          <LeftMenu />
+        </div>
+        <div className="rightMenu">
           <RightMenu />
-      </div>
-      <Button className="barsMenu" type="primary" onClick={showDrawer2}>
-        <span className="barsBtn"></span>
-      </Button>
-      <Drawer
-        title="Basic Drawer"
-        placement="right"
-        closable={false}
-        onClose={onClose2}
-        visible={state.visible}
-      >
-         {/* <Menu mode="horizontal">
+        </div>
+        <Button className="barsMenu" type="primary" onClick={showDrawer2}>
+          <span className="barsBtn"></span>
+        </Button>
+        <Drawer
+          title="Basic Drawer"
+          placement="right"
+          closable={false}
+          onClose={onClose2}
+          visible={state.visible}
+        >
+          {/* <Menu mode="horizontal">
         <Menu.Item key="mail">
           <a href="">Signin</a>
         </Menu.Item>
@@ -159,24 +160,24 @@ const Header = () => {
         </Menu.Item>
       </Menu> */}
 
-      
-        {/* <LeftMenu />
+
+          {/* <LeftMenu />
         <RightMenu /> */}
-         
-        
-       
-              {/* <Link href="#hero" title="Home" />
+
+
+
+          {/* <Link href="#hero" title="Home" />
               <Link href="#about" title="About" />
               <Link href="#feature" title="Features" />
               <Link href="#works" title="How it works" />
               <Link href="#faq" title="FAQ" />
               <Link href="#pricing" title="Pricing" />
               <Link href="#contact" title="Contact" /> */}
-                {/* <LeftMenu />
+          {/* <LeftMenu />
         <RightMenu /> */}
-          
 
-{/* 
+
+          {/* 
         <Link href="/" title="Home"/>
      
 
@@ -209,127 +210,127 @@ const Header = () => {
           
           )}
           {user &&  <Link onClick={logout} title="Logout"/>} */}
-          
-    
-        {/* <Link href="cart"
+
+
+          {/* <Link href="cart"
           <Badge count={cart.length} offset={[9, 0]}>
             Cart
           </Badge>
         </Link> */}
 
 
-    
- <ul>
 
-<li>
-<Link to="/">Home</Link>
-</li>
+          <ul>
 
-<li>
-<Link to="/shop">Shop</Link>
-</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
 
-<li>
-<Link to="/cart">
-          <Badge count={cart.length} offset={[9, 0]}>
-            Cart
-          </Badge>
-        </Link>
-</li>
-{!user &&   <li>
-  {!user && (
-      
-      <Link to="/register">Register</Link>
-  
-  )}
-  </li> }
+            <li>
+              <Link to="/shop">Shop</Link>
+            </li>
 
+            <li>
+              <Link to="/cart">
+                <Badge count={cart.length} offset={[9, 0]}>
+                  Cart
+                </Badge>
+              </Link>
+            </li>
+            {!user && <li>
+              {!user && (
 
-  {!user && <li>
-{!user && (
-    
-    <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
 
-)}
-</li>}
+              )}
+            </li>}
 
 
-{user && user.role === "subscriber" &&  <li>
-{user && user.role === "subscriber" && (
-       
-       <Link to="/user/history">Dashboard</Link>
-   
-   )}
-</li>}
+            {!user && <li>
+              {!user && (
+
+                <Link to="/login">Login</Link>
+
+              )}
+            </li>}
 
 
-{user && user.role === "admin" && <li>
-{user && user.role === "admin" && (
-       
-       <Link to="/admin/dashboard">Dashboard</Link>
-   
-   )}
-</li>}
+            {user && user.role === "subscriber" && <li>
+              {user && user.role === "subscriber" && (
 
-    
-{user && <li> {user && <Link onClick={logout}>Logout</Link>}</li>} 
+                <Link to="/user/history">Dashboard</Link>
+
+              )}
+            </li>}
 
 
-     
- </ul>
+            {user && user.role === "admin" && <li>
+              {user && user.role === "admin" && (
+
+                <Link to="/admin/dashboard">Dashboard</Link>
+
+              )}
+            </li>}
+
+
+            {user && <li> {user && <Link onClick={logout}>Logout</Link>}</li>}
 
 
 
-
-          
-           
-      </Drawer>
-</div>
-  </nav>
+          </ul>
 
 
 
-/* <div className="container-fluid">
-<div className="header">
-  <div className="logo">
-    <i className="fas fa-bolt"></i>
-    <a href="http://google.com">Tech</a>
-  </div>
-  <div className="mobileHidden">
-    <Anchor targetOffset="65">
-      <Link href="#hero" title="Home" />
-      <Link href="#about" title="About" />
-      <Link href="#feature" title="Features" />
-      <Link href="#works" title="How it works" />
-      <Link href="#faq" title="FAQ" />
-      <Link href="#pricing" title="Pricing" />
-      <Link href="#contact" title="Contact" />
-    </Anchor>
-  </div>
-  <div className="mobileVisible">
-    <Button type="primary" onClick={showDrawer}>
-      <i className="fas fa-bars"></i>
-    </Button>
-    <Drawer
-      placement="right"
-      closable={false}
-      onClose={onClose}
-      visible={visible}
-    >
-      <Anchor targetOffset="65">
-        <Link href="#hero" title="Home" />
-        <Link href="#about" title="About" />
-        <Link href="#feature" title="Features" />
-        <Link href="#works" title="How it works" />
-        <Link href="#faq" title="FAQ" />
-        <Link href="#pricing" title="Pricing" />
-        <Link href="#contact" title="Contact" />
-      </Anchor>
-    </Drawer>
-  </div>
-</div>
-</div> */
+
+
+
+        </Drawer>
+      </div>
+    </nav>
+
+
+
+    /* <div className="container-fluid">
+    <div className="header">
+      <div className="logo">
+        <i className="fas fa-bolt"></i>
+        <a href="http://google.com">Tech</a>
+      </div>
+      <div className="mobileHidden">
+        <Anchor targetOffset="65">
+          <Link href="#hero" title="Home" />
+          <Link href="#about" title="About" />
+          <Link href="#feature" title="Features" />
+          <Link href="#works" title="How it works" />
+          <Link href="#faq" title="FAQ" />
+          <Link href="#pricing" title="Pricing" />
+          <Link href="#contact" title="Contact" />
+        </Anchor>
+      </div>
+      <div className="mobileVisible">
+        <Button type="primary" onClick={showDrawer}>
+          <i className="fas fa-bars"></i>
+        </Button>
+        <Drawer
+          placement="right"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <Anchor targetOffset="65">
+            <Link href="#hero" title="Home" />
+            <Link href="#about" title="About" />
+            <Link href="#feature" title="Features" />
+            <Link href="#works" title="How it works" />
+            <Link href="#faq" title="FAQ" />
+            <Link href="#pricing" title="Pricing" />
+            <Link href="#contact" title="Contact" />
+          </Anchor>
+        </Drawer>
+      </div>
+    </div>
+    </div> */
   );
- };
+};
 
 export default Header;

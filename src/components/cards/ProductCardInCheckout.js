@@ -1,13 +1,16 @@
-import React from "react";
-import ModalImage from "react-modal-image";
-import laptop from "../../images/laptop.png";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import { Card, Tooltip } from "antd";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
+import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+
+import ModalImage from "react-modal-image";
+import React from "react";
+import laptop from "../../images/laptop.png";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const ProductCardInCheckout = ({ p }) => {
   const colors = ["Black", "Brown", "Silver", "White", "Blue"];
@@ -92,7 +95,7 @@ const ProductCardInCheckout = ({ p }) => {
 
   return (
     <tbody>
-      <tr>
+      {/* <tr >
         <td>
           <div style={{ width: "100px", height: "auto" }}>
             {p.images.length ? (
@@ -102,9 +105,9 @@ const ProductCardInCheckout = ({ p }) => {
             )}
           </div>
         </td>
-        <td>{p.title}</td>
-        <td>${p.price}</td>
-        <td>{p.brand}</td>
+        <td ><h6>{p.title}</h6></td>
+        <td><h6>${p.price}</h6></td>
+        <td><h6>{p.brand}</h6></td>
         <td>
           <select
             onChange={handleColorChange}
@@ -146,7 +149,79 @@ const ProductCardInCheckout = ({ p }) => {
             className="text-danger pointer"
           />
         </td>
-      </tr>
+      </tr> */}
+
+      <div className="card mb-2 rounded">
+        <div >
+          <div className="d-flex align-items-start mb-4 mt-4 justify-center" >
+
+            <div className="col-3" >
+              <div className="bg-image hover-overlay ripple" style={{ width: "100%", height: "auto" }}>
+                {p.images.length ? (
+                  <ModalImage small={p.images[0].url} large={p.images[0].url} />
+                ) : (
+                  <ModalImage small={laptop} large={laptop} />
+                )}
+              </div>
+            </div>
+
+            <div className="col-6">
+              <h3>{p.title}</h3>
+              <h6 className="text-muted pt-2">Brand: {p.brand}</h6>
+              <div className="d-flex align-items-start pt-2">
+                <select
+                  onChange={handleColorChange}
+                  name="color"
+                  className="form-control btn btn-primary outline"
+                >
+                  {p.color ? (
+                    <option value={p.color}>{p.color}</option>
+                  ) : (
+                    <option>Select</option>
+                  )}
+                  {colors
+                    .filter((c) => c !== p.color)
+                    .map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                </select>
+                <td className="text-center pt-2">
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={p.count}
+                    onChange={handleQuantityChange}
+                  />
+                </td>
+              </div>
+
+            </div>
+
+
+            <div className="col-4">
+              <h6 className="text-primary">Price: ${p.price}</h6>
+              <div className=" btn ">
+                <p>Shipping:</p>
+                {p.shipping === "Yes" ? (
+                  <CheckCircleOutlined className="text-success" />
+                ) : (
+                  <CloseCircleOutlined className="text-danger" />
+                )}
+              </div>
+              <br />
+              <div className="btn">
+                <p>Remove:</p>
+                <CloseOutlined
+                  onClick={handleRemove}
+                  className="text-danger pointer"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </tbody>
   );
 };

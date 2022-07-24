@@ -1,7 +1,8 @@
-import React from "react";
-import { Drawer, Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { Button, Drawer } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
+import React from "react";
 import laptop from "../../images/laptop.png";
 
 const SideDrawer = () => {
@@ -9,8 +10,8 @@ const SideDrawer = () => {
   const { drawer, cart } = useSelector((state) => ({ ...state }));
 
   const imageStyle = {
-    width: "100%",
-    height: "50px",
+    width: "70px",
+    height: "70px",
     objectFit: "cover",
   };
 

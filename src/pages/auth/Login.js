@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { auth, googleAuthProvider,FacebookAuthProvider } from "../../firebase";
-import { toast } from "react-toastify";
-import { Button } from "antd";
-import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
+import { FacebookAuthProvider, auth, googleAuthProvider } from "../../firebase";
+import { FacebookOutlined, GoogleOutlined, MailOutlined, RetweetOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import { toast } from "react-toastify";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -170,45 +171,86 @@ const Login = ({ history }) => {
   );
 
   return (
-    <div className="container p-5">
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Login</h4>
-          )}
-          {loginForm()}
+    <div>
+      <div>
+        <section class="h-100 gradient-form loginImage" >
+          <div class="container py-5 ">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-xl-10">
+                <div class="card text-black">
+                  <div class="row g-0">
+                    <div class="col-lg-6">
+                      <div class="card-body p-md-5 mx-md-4">
 
-          <Button
-            onClick={googleLogin}
-            type="danger"
-            className="mb-3"
-            block
-            shape="round"
-            icon={<GoogleOutlined />}
-            size="large"
-          >
-            Login with Google
-          </Button>
-          <Button
-            onClick={facebookLogin}
-            type="danger"
-            className="mb-3"
-            block
-            shape="round"
-            icon={<GoogleOutlined />}
-            size="large"
-          >
-            Login with Facebook
-          </Button>
+                        <div class="text-center">
+                          <h4 class="mt-1 mb-5 pb-1">We are The Best Water Supplier Team</h4>
+                        </div>
 
-          <Link to="/forgot/password" className="float-right text-danger">
-            Forgot Password
-          </Link>
-        </div>
-      </div>
-    </div>
+                        <div>
+                          <div className="">
+                            {loading ? (
+                              <h2 className="text-danger">Loading...</h2>
+                            ) : (
+                              <h1>Login</h1>
+                            )}
+                            {loginForm()}
+
+                            <Button
+                              onClick={googleLogin}
+                              type="danger"
+                              className="mb-3"
+                              block
+                              shape="round"
+                              icon={<GoogleOutlined />}
+                              size="large"
+                            >
+                              Login with Google
+                            </Button>
+                            <Button
+                              onClick={facebookLogin}
+                              type="primary"
+                              className="mb-3"
+                              block
+                              shape="round"
+                              icon={<FacebookOutlined />}
+                              size="large"
+                            >
+                              Login with Facebook
+                            </Button>
+
+                            <Button
+                              type="default"
+                              className="mb-3"
+                              block
+                              shape="round"
+                              size="large"
+                              icon={<RetweetOutlined />}
+                              href="/forgot/password"
+                            >
+                              Forgot Password
+                            </Button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center oliveGreen">
+                      <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                        <h4 class="mb-4">We are more than just a company</h4>
+                        <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div >
+
+    </div >
   );
 };
 
