@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
       )}
 
       <Card
-        style={{ width: 300, marginTop: 16 }}
+        style={{ width: 360, marginTop: 16 }}
         className="rounded"
         hoverable
         cover={

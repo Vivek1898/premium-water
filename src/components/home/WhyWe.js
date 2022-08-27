@@ -2,8 +2,8 @@ import React from 'react'
 
 export const WhyWe = () => {
     return (
-        <div className="row g-5 text-white align-items-center">
-            <div className="col-6 col-md-3 oliveGreen p-3 ">
+        <div className="row g-5 text-white align-items-center ">
+            <div className="col-6 col-md-3 oliveGreen p-3">
                 <div className="d-flex" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 54.5 54.5">
                         <path id="Icon_material-stars" data-name="Icon material-stars" d="M30.223,3A27.25,27.25,0,1,0,57.5,30.25,27.237,27.237,0,0,0,30.223,3ZM41.777,46.6,30.25,39.651,18.723,46.6l3.052-13.107-10.164-8.8,13.407-1.145L30.25,11.175l5.232,12.344,13.407,1.144-10.164,8.8L41.777,46.6Z" transform="translate(-3 -3)" fill="#fff" />

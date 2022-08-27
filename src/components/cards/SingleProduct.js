@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { Card, Tabs, Tooltip } from "antd";
-import { Link } from "react-router-dom";
-import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import { Card, Tabs, Tooltip } from "antd";
+import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Carousel } from "react-responsive-carousel";
 import Laptop from "../../images/laptop.png";
+import { Link } from "react-router-dom";
 import ProductListItems from "./ProductListItems";
-import StarRating from "react-star-ratings";
 import RatingModal from "../modal/RatingModal";
-import { showAverage } from "../../functions/rating";
+import StarRating from "react-star-ratings";
 import _ from "lodash";
-import { useSelector, useDispatch } from "react-redux";
 import { addToWishlist } from "../../functions/user";
+import { showAverage } from "../../functions/rating";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
@@ -94,7 +96,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
       </div>
 
       <div className="col-md-5">
-        <h1 className="bg-info p-3">{title}</h1>
+        <h1 className="oliveGreen text-white p-3">{title}</h1>
 
         {product && product.ratings && product.ratings.length > 0 ? (
           showAverage(product)

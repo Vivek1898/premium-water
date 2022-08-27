@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import UserNav from "../../components/nav/UserNav";
+import React, { useEffect, useState } from "react";
 import { getWishlist, removeWishlist } from "../../functions/user";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { DeleteOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import UserNav from "../../components/nav/UserNav";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -30,8 +31,8 @@ const Wishlist = () => {
         <div className="col-md-2">
           <UserNav />
         </div>
-        <div className="col">
-          <h4>Wishlist</h4>
+        <div className="col ">
+          <h2 >Wishlist</h2>
 
           {wishlist.map((p) => (
             <div key={p._id} className="alert alert-secondary">

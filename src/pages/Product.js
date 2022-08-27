@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getProduct, productStar } from "../functions/product";
-import SingleProduct from "../components/cards/SingleProduct";
-import { useSelector } from "react-redux";
-import { getRelated } from "../functions/product";
+
+import { Footer } from "../components/footer/Footer";
 import ProductCard from "../components/cards/ProductCard";
+import SingleProduct from "../components/cards/SingleProduct";
+import { getRelated } from "../functions/product";
+import { useSelector } from "react-redux";
 
 const Product = ({ match }) => {
   const [product, setProduct] = useState({});
@@ -45,7 +47,7 @@ const Product = ({ match }) => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid bg-light">
       <div className="row pt-4">
         <SingleProduct
           product={product}
@@ -54,11 +56,11 @@ const Product = ({ match }) => {
         />
       </div>
 
-      <div className="row">
-        <div className="col text-center pt-5 pb-5">
-          <hr />
-          <h4>Related Products</h4>
-          <hr />
+      <div className="row pt-5">
+        <div className="col text-center pt-3 pb-3 oliveGreen">
+
+          <h2>Related Products</h2>
+
         </div>
       </div>
 
@@ -73,6 +75,7 @@ const Product = ({ match }) => {
           <div className="text-center col">No Products Found</div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

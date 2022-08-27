@@ -1,6 +1,9 @@
+import './home.css'
+
 import { AboutUs } from "../components/home/AboutUs";
 import BestSellers from "../components/home/BestSellers";
 import CategoryList from "../components/category/CategoryList";
+import { Footer } from "../components/footer/Footer";
 import Hero from "../components/home/Hero";
 import { ImageExp } from "../components/home/ImageExp";
 import Jumbotron from "../components/cards/Jumbotron";
@@ -8,7 +11,6 @@ import NewArrivals from "../components/home/NewArrivals";
 import React from "react";
 import SubList from "../components/sub/SubList";
 import { WhyWe } from "../components/home/WhyWe";
-
 const Home = () => {
   const mystyle = {
     "backgroundColor": "black"
@@ -57,6 +59,7 @@ const Home = () => {
         <SubList /> */}
 
       {/* </div> */}
+      <Footer />
 
     </div >
   );
